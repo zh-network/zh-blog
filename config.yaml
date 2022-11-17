@@ -64,6 +64,7 @@ params:
     comments:
        enabled: true
        provider: utterances
+
        utterances:
            repo: zh-network/zh-blog-comments
            issueTerm: pathname
