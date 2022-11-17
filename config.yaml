@@ -1,26 +1,21 @@
-baseurl: https://example.com
-languageCode: en-us
+baseurl: https://blog.eden-official.co.uk
+languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 5
-title: Example Site
+title: ZH Fontana's Blog
 
 languages:
-    en:
-        languageName: English
-        title: Example Site
-        description: Example description
-        weight: 1
     zh-cn:
         languageName: 中文
-        title: 演示站点
-        description: 演示说明
+        title: ZH Fontana 的日常～
+        description: 会写一些日常生活日记，也有技术日记，反正什么都往里扔就是了！
         weight: 2
-    ar:
-        languageName: عربي
-        languagedirection: rtl
-        title: موقع تجريبي
-        description: وصف تجريبي
-        weight: 3
+    en:
+        languageName: English
+        title: ZH Fontana's Blog
+        description: ZH Fontana's Blog
+        weight: 1
+
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -30,7 +25,7 @@ googleAnalytics:
 
 # Theme i18n support
 # Available values: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
-DefaultContentLanguage: en
+DefaultContentLanguage: zh-cn
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
@@ -52,12 +47,12 @@ params:
         customText:
 
     dateFormat:
-        published: Jan 02, 2006
-        lastUpdated: Jan 02, 2006 15:04 MST
+        published: Nov 18, 2022
+        lastUpdated: Nov 18, 2022 04:38 CST
 
     sidebar:
         emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        subtitle: 今天的涵还开心嘛...?
         avatar:
             enabled: true
             local: true
@@ -199,13 +194,13 @@ menu:
     social:
         - identifier: github
           name: GitHub
-          url: https://github.com/CaiJimmy/hugo-theme-stack
+          url: https://github.com/Edenmi
           params:
               icon: brand-github
 
         - identifier: twitter
           name: Twitter
-          url: https://twitter.com
+          url: https://twitter.com/zh_fontana
           params:
               icon: brand-twitter
 
