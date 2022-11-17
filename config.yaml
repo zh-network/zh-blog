@@ -62,12 +62,15 @@ params:
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
-       enabled: true
-       provider: utterances
+        enabled: true
+        provider: utterances
 
-       utterances:
+        utterances:
+           theme: github-dark
+           label: zh-blog
            repo: zh-network/zh-blog-comments
            issueTerm: pathname
+
 
         # Waline client configuration see: https://waline.js.org/en/reference/component.html
         waline:

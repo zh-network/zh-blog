@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on ZH 小涵的日常～</title>
+        <link>https://blog.eden-official.co.uk/categories/</link>
+        <description>Recent content in Categories on ZH 小涵的日常～</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Thu, 17 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.eden-official.co.uk/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ZH</title>
+        <link>https://blog.eden-official.co.uk/categories/zh/</link>
+        <pubDate>Thu, 17 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://blog.eden-official.co.uk/categories/zh/</guid>
+        <description>&lt;img src="https://blog.eden-official.co.uk/categories/zh/IMG_20221105_225400_796.jpg" alt="Featured image of post ZH" /&gt;</description>
+        </item>
+        <item>
+        <title>涵</title>
+        <link>https://blog.eden-official.co.uk/categories/%E6%B6%B5/</link>
+        <pubDate>Thu, 17 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://blog.eden-official.co.uk/categories/%E6%B6%B5/</guid>
+        <description>&lt;img src="https://blog.eden-official.co.uk/categories/%E6%B6%B5/IMG_20221105_225400_796.jpg" alt="Featured image of post 涵" /&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
