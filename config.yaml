@@ -68,33 +68,6 @@ params:
            repo: zh-network/zh-blog-comments
            issueTerm: pathname
 
-
-
-        disqusjs:
-            shortname:
-            apiUrl:
-            apiKey:
-            admin:
-            adminLabel:
-
-        utterances:
-            repo:
-            issueTerm: pathname
-            label:
-
-        remark42:
-            host:
-            site:
-            locale:
-
-        vssue:
-            platform:
-            owner:
-            repo:
-            clientId:
-            clientSecret:
-            autoCreateIssue: false
-
         # Waline client configuration see: https://waline.js.org/en/reference/component.html
         waline:
             serverURL:
