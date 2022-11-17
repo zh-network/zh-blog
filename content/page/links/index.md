@@ -18,7 +18,7 @@ menu:
 comments: false
 ---
 
-如需添加涵为友链，请按照 `links` 内的格式添加到您的网站，然后在评论区留言您的信息（同样格式）。 
+如需添加涵为友链，请按照 `links` 内的格式添加到您的网站，然后发送邮件至 `info@zhnet.co.uk` 或联系Telegram `@zh_210320` 留言您的信息（同样格式）。 
 
 If you wanna add ZH's Blog to your Quick Link, Please add infomation format like below(in English).
 
