@@ -1,14 +1,14 @@
 ---
-title: Links
+title: 友情链接
 links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  - title: TypeScript
-    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-    website: https://www.typescriptlang.org
-    image: ts-logo-128.jpg
+  - title: ZH NET
+    description: ZH 自营网络 ZH NETWORK LIMITED(AS202888).
+    website: https://zhnet.co.uk
+    image: https://dp2-9gqbw0qaf681fbec-1305978723.tcloudbaseapp.com/zhnet/logoonly-removebg-preview.png
+  - title: ZH的爱发电
+    description: ZH的爱发电页面！欢迎大家给涵发电！！！
+    website: https://afdian.net/a/zh_fontana
+    image: /afd.png
 menu:
     main: 
         weight: -50
@@ -18,20 +18,20 @@ menu:
 comments: false
 ---
 
-To use this feature, add `links` section to frontmatter.
+如需添加涵为友链，请按照 `links` 内的格式添加到您的网站，然后在评论区留言您的信息（同样格式）。 
 
-This page's frontmatter:
+If you wanna add ZH's Blog to your Quick Link, Please add infomation format like below(in English).
 
 ```yaml
-links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  - title: TypeScript
-    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-    website: https://www.typescriptlang.org
-    image: ts-logo-128.jpg
+链接:
+  - 标题: ZH小涵的日常～
+    描述: 今天的涵还开心嘛...?
+    网站: https://blog.eden-official.co.uk
+    LOGO: https://ixp.ee/zh-avatar.jpg
+  - Tittle: ZH's Blog
+    Description: ZH Fontana's Personal Blog
+    Website: https://blog.eden-official.co.uk
+    LOGO: https://ixp.ee/zh-avatar.jpg
 ```
 
 `image` field accepts both local and external images.

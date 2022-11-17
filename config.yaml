@@ -7,14 +7,9 @@ title: ZH Fontana's Blog
 languages:
     zh-cn:
         languageName: 中文
-        title: ZH Fontana 的日常～
+        title: ZH 小涵的日常～
         description: 会写一些日常生活日记，也有技术日记，反正什么都往里扔就是了！
         weight: 2
-    en:
-        languageName: English
-        title: ZH Fontana's Blog
-        description: ZH Fontana's Blog
-        weight: 1
 
 
 # Change it to your Disqus shortname before using
@@ -40,7 +35,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:  # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    favicon: /yuban.svg # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
         since: 2020

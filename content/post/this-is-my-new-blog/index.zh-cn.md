@@ -5,10 +5,8 @@ date: 2022-11-17
 slug: this-is-my-new-blog
 image: zh-20221002-middle0finger.jpg
 categories:
-    - ZH
     - 涵
-    - 生活
-    - 技术
+    - ZH
 ---
 
 ## 引言
