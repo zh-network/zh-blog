@@ -1,12 +1,14 @@
 ---
-title: Chinese Test
-description: 这是一个副标题
-date: 2020-09-09
-slug: test-chinese
-image: helena-hertz-wWZzXlDpMog-unsplash.jpg
+title: 这是涵的新博客！
+description: 以后就在这里投稿一些高质量的生活点滴和技术点滴，学习和实验记录等等，大家多多关照w～
+date: 2022-11-18
+slug: this-is-my-new-blog
+image: zh-20221002-middle0finger.jpg
 categories:
-    - Test
-    - 测试
+    - ZH
+    - 涵
+    - 生活
+    - 技术
 ---
 
 ## 正文测试
