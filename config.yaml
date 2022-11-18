@@ -31,6 +31,7 @@ permalinks:
     page: /:slug/
 
 params:
+    page_view_conter = true
     mainSections:
         - post
     featuredImageField: image
