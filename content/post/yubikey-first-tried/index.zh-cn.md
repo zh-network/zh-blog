@@ -5,8 +5,8 @@ date: 2022-11-18
 slug: yubikey-first-tried
 image: IMG_20221117_182657.jpg
 categories:
-    - 涵
-    - ZH
+    - 技术日常
+    - 生活点滴
 ---
 
 年轻人的第一个硬件密钥（本文任何演示依旧使用 ` MacOS Ventura 13.0.1` ）
