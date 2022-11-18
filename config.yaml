@@ -31,7 +31,8 @@ permalinks:
     page: /:slug/
 
 params:
-    page_view_conter = true
+    description: "ZH 小涵的日常～，ZH，小涵，blog，zh_fontana，Eden"
+    page_view_conter: true
     mainSections:
         - post
     featuredImageField: image
