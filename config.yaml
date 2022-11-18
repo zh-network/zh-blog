@@ -31,7 +31,8 @@ permalinks:
     page: /:slug/
 
 params:
-    description: "ZH 小涵的日常～，ZH，小涵，blog，zh_fontana，Eden"
+    keywords: "ZH 小涵的日常～，ZH，小涵，blog，zh_fontana，Eden"
+    description: "ZH 小涵的日常～,以后就在这里投稿一些高质量的生活点滴和技术点滴，学习和实验记录等等，大家多多关照w～"
     page_view_conter: true
     mainSections:
         - post
