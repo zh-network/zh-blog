@@ -39,7 +39,7 @@ hugo server
 
 然后在本地服务器打开浏览器，输入 [http://localhost:1313](http://localhost:1313) 即可预览示例网站
 
-# 文件架构
+## 文件架构
 ```
 .
 ├── archetypes                  
