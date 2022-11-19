@@ -9,6 +9,10 @@ links:
     description: ZH的爱发电页面！欢迎大家给涵发电！！！
     website: https://afdian.net/a/zh_fontana
     image: /afd.png
+  - title: Jioushan
+    description: 虽然是个废宅，这是我仅存的一点空间，不要压垮它。
+    website: https://blog.jsmsr.com
+    image: https://cdn.jioushan.top/img/4.jpeg
 menu:
     main: 
         weight: -50
