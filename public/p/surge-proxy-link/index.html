@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='如果你和涵一样，有一个优秀的机场但是不想用机场提供的IP，哪怕他们做的很好，想使用自己的IP来独享自己的落地机器，恰巧你也有自己的落地节点（例如流媒体优秀）却没有合适的中转线路来链接到目标节点，裸奔怕被强或者速度慢，那么我们就可以让自己的原节点(目标落地机器)搭建节点后，在本地通过某个已有的机场节点（被优化过的中转&#43;落地链路）连接到咱自己准备的落地机器。'>
+<title>代理链配置 - 让 Socks5/ssr 等协议在同等协议之上连接</title>
+
+<link rel='canonical' href='https://blog.eden-official.co.uk/p/surge-proxy-link/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='代理链配置 - 让 Socks5/ssr 等协议在同等协议之上连接'>
+<meta property='og:description' content='如果你和涵一样，有一个优秀的机场但是不想用机场提供的IP，哪怕他们做的很好，想使用自己的IP来独享自己的落地机器，恰巧你也有自己的落地节点（例如流媒体优秀）却没有合适的中转线路来链接到目标节点，裸奔怕被强或者速度慢，那么我们就可以让自己的原节点(目标落地机器)搭建节点后，在本地通过某个已有的机场节点（被优化过的中转&#43;落地链路）连接到咱自己准备的落地机器。'>
+<meta property='og:url' content='https://blog.eden-official.co.uk/p/surge-proxy-link/'>
+<meta property='og:site_name' content='ZH 小涵的日常～'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-11-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-18T00:00:00&#43;00:00'/><meta property='og:image' content='https://blog.eden-official.co.uk/p/surge-proxy-link/QQ20221120-015953@2x.png' />
+<meta name="twitter:title" content="代理链配置 - 让 Socks5/ssr 等协议在同等协议之上连接">
+<meta name="twitter:description" content="如果你和涵一样，有一个优秀的机场但是不想用机场提供的IP，哪怕他们做的很好，想使用自己的IP来独享自己的落地机器，恰巧你也有自己的落地节点（例如流媒体优秀）却没有合适的中转线路来链接到目标节点，裸奔怕被强或者速度慢，那么我们就可以让自己的原节点(目标落地机器)搭建节点后，在本地通过某个已有的机场节点（被优化过的中转&#43;落地链路）连接到咱自己准备的落地机器。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://blog.eden-official.co.uk/p/surge-proxy-link/QQ20221120-015953@2x.png' />
+    <link rel="shortcut icon" href="/yuban.svg" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu009c14104d7f2234cfca5e66f40ef290_77990_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">ZH 小涵的日常～</a></h1>
+            <h2 class="site-description">今天的涵还开心嘛...?</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Edenmi'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/zh_fontana'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>存档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#代理链嵌套代理的好处">代理链(嵌套代理)的好处</a></li>
+    <li><a href="#原理展示">原理展示</a></li>
+    <li><a href="#开始配置-proxy-link">开始配置 (Proxy Link)</a>
+      <ol>
+        <li><a href="#初始化配置文件">初始化配置文件</a></li>
+        <li><a href="#设置代理链">设置代理链</a></li>
+      </ol>
+    </li>
+    <li><a href="#大功告成">大功告成</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/surge-proxy-link/">
+                <img src="/p/surge-proxy-link/QQ20221120-015953@2x_hu04659013495eb7b1b6f2b9c3f15e1949_32204_800x0_resize_box_3.png"
+                        srcset="/p/surge-proxy-link/QQ20221120-015953@2x_hu04659013495eb7b1b6f2b9c3f15e1949_32204_800x0_resize_box_3.png 800w, /p/surge-proxy-link/QQ20221120-015953@2x_hu04659013495eb7b1b6f2b9c3f15e1949_32204_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="261" 
+                        loading="lazy"
+                        alt="Featured image of post 代理链配置 - 让 Socks5/ssr 等协议在同等协议之上连接" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%B8%B8/" style="background-color: #2a9d8f; color: #fff;">
+                技术日常
+            </a>
+        
+            <a href="/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/" style="background-color: #2a9d8f; color: #fff;">
+                生活点滴
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/surge-proxy-link/">代理链配置 - 让 Socks5/ssr 等协议在同等协议之上连接</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            如果你和涵一样，有一个优秀的机场但是不想用机场提供的IP，哪怕他们做的很好，想使用自己的IP来独享自己的落地机器，恰巧你也有自己的落地节点（例如流媒体优秀）却没有合适的中转线路来链接到目标节点，裸奔怕被强或者速度慢，那么我们就可以让自己的原节点(目标落地机器)搭建节点后，在本地通过某个已有的机场节点（被优化过的中转&#43;落地链路）连接到咱自己准备的落地机器。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 117, 181818</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><del>如何优雅的使用自己的节点</del></p>
+<h2 id="代理链嵌套代理的好处">代理链(嵌套代理)的好处</h2>
+<ul>
+<li>在几乎不影响访问速度的同时（前提是两个节点连接延迟较低），隐藏实际请求地址来增加流量通过公用节点的数据安全性</li>
+<li>可以通过自定义私有出口节点的配置来优化提高一些地区/地址的访问速度，而不用关心公共节点的具体出口策略</li>
+<li>最大化发挥出公共节点（带宽高，稳定）和私有节点（可自定义，灵活）的优势</li>
+</ul>
+<h2 id="原理展示">原理展示</h2>
+<p>本文依旧使用 <code>MacOS Ventura</code> 为本地环境来演示，并使用Surge作为本次演示的程序</p>
+<p>Proxy Chain:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+---------+      +----------+        +----------+      +--------+
+</span></span><span class="line"><span class="cl">|         |      |          |  Chain |          |      |        |
+</span></span><span class="line"><span class="cl">|  Surge  +-----&gt;+ Policy_A +-------&gt;+ Policy_B +-----&gt;+ Target |
+</span></span><span class="line"><span class="cl">|         |      |          |        |          |      |        |
+</span></span><span class="line"><span class="cl">+---------+      +----------+        +----------+      +--------+
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                 (优化节点/代理) -&gt;链路-&gt; (自主落地)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Proxy Link:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+---------+      +----------+        +----------+      +--------+
+</span></span><span class="line"><span class="cl">|         |  via |          |    to  |          |      |        |
+</span></span><span class="line"><span class="cl">|  Surge  +-----&gt;+ Policy_A +-------&gt;+ Policy_B +-----&gt;+ Target |
+</span></span><span class="line"><span class="cl">|         |      |          |        |          |      |        |
+</span></span><span class="line"><span class="cl">+---------+      +----------+        +----------+      +--------+
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                 (优化前置线路)         (自主落地)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="开始配置-proxy-link">开始配置 (Proxy Link)</h2>
+<p>首先打开我们本地的代理软件 <code>Surge</code>，</p>
+<p><img src="/p/surge-proxy-link/QQ20221120-020823@2x.png"
+	width="2062"
+	height="1400"
+	srcset="/p/surge-proxy-link/QQ20221120-020823@2x_hub2c629567cb618ee21bbcb46aacb52f3_339417_480x0_resize_box_3.png 480w, /p/surge-proxy-link/QQ20221120-020823@2x_hub2c629567cb618ee21bbcb46aacb52f3_339417_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Surge"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="147"
+		data-flex-basis="353px"
+	
+></p>
+<h3 id="初始化配置文件">初始化配置文件</h3>
+<p>使用代码(文本)编辑器打开一份已激活的配置，建议选择非订阅的本地配置文件，更方便的编辑文件并可以在UI更改部分设置并不受订阅更新影响。</p>
+<p>如何分辨该配置文件是否为 <code>订阅的</code> 配置文件？</p>
+<p>打开一份配置文件，如文件开头有 <code>#!MANAGED-CONFIG https://xxxxxxxxxxxxxxxx</code> 字样就代表该文件是启用订阅的配置文件，您可以直接删掉开头的订阅自符，但这也将直接关闭该配置文件的订阅行为。</p>
+<p><img src="/p/surge-proxy-link/QQ20221120-021504@2x.png"
+	width="1394"
+	height="866"
+	srcset="/p/surge-proxy-link/QQ20221120-021504@2x_hucfcf065ff45b98b61ea8e6fe5be9cd98_370144_480x0_resize_box_3.png 480w, /p/surge-proxy-link/QQ20221120-021504@2x_hucfcf065ff45b98b61ea8e6fe5be9cd98_370144_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Managed-Config"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="386px"
+	
+></p>
+<p>本文不再赘述如何提取单个文件内的代理/规则等模块。</p>
+<h3 id="设置代理链">设置代理链</h3>
+<p><code>通过举例</code>简单阐述一下我们这次设置代理链实现的目的和原理：</p>
+<p>我们现在有优秀的机场奶昔的订阅（节点），我们将通过奶昔的优化线路节点（上海 - 美国西雅图）的节点，来使用我们自有的落地节点</p>
+<p>也就是相当于 <code>ProxyA via ProxyB ｜ ProxyB over ProxyA</code></p>
+<p>在Surge内，代理链的配置不算难，我们首先添加我们的落地节点：</p>
+<p><img src="/p/surge-proxy-link/QQ20221120-022517@2x.png"
+	width="1712"
+	height="446"
+	srcset="/p/surge-proxy-link/QQ20221120-022517@2x_hu10c248e323a78ce9051eb0925f1c0c1b_81735_480x0_resize_box_3.png 480w, /p/surge-proxy-link/QQ20221120-022517@2x_hu10c248e323a78ce9051eb0925f1c0c1b_81735_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="红圈圈住的部分为添加的自主落地直连节点"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="383"
+		data-flex-basis="921px"
+	
+></p>
+<p>然后我们使用 Surge 的 <code>underlying-proxy</code> 参数来设定通过哪个节点访问这个节点:</p>
+<p><img src="/p/surge-proxy-link/QQ20221120-022902@2x.png"
+	width="2112"
+	height="556"
+	srcset="/p/surge-proxy-link/QQ20221120-022902@2x_hu4b0ba01105a630e42cd02264aa4457bd_134342_480x0_resize_box_3.png 480w, /p/surge-proxy-link/QQ20221120-022902@2x_hu4b0ba01105a630e42cd02264aa4457bd_134342_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="红圈圈住的部分为设置的上级节点"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="379"
+		data-flex-basis="911px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">···
+</span></span><span class="line"><span class="cl">[Proxy]
+</span></span><span class="line"><span class="cl">···
+</span></span><span class="line"><span class="cl">🇺🇸 SAT-LAX ZHNET = ss, xxx.xxx.xxx.xxx, 12021, encrypt-method=aes-256-gcm, password=your-passwd, udp-relay=true, underlying-proxy=🇭🇰 奶昔香港
+</span></span><span class="line"><span class="cl">🇭🇰 奶昔香港 = trojan, xxx.xxx.com, 12345, password=xxxxx-xxxxxxxxxxx-xxxx-xxxx-xxxxx, skip-cert-verify=true, sni=xxx.com, tfo=true
+</span></span><span class="line"><span class="cl">···
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样就设置好代理链啦！</p>
+<h2 id="大功告成">大功告成</h2>
+<p>现在 Surge 重载配置文件，选择你自己的代理链节点，在访问 <a class="link" href="https://ipinfo.io"  target="_blank" rel="noopener"
+    >ipinfo.io</a> 就可以看到自己的IP 是你自己的自主落地啦！（当然是通过你设置的 underlying-proxy 访问的！）</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/yubikey-first-tried/">
+        
+        
+            <div class="article-image">
+                <img src="/p/yubikey-first-tried/IMG_20221117_182657.d169815fa4f6557c4272d1bc9e454f83_hub3e2fb206ab53cbbfdaa1eee0eb419a3_2500744_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 第一次尝试 Yubikey！"
+                        data-key="yubikey-first-tried" 
+                        data-hash="md5-0WmBX6T2VXxCctG8nkVPgw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">第一次尝试 Yubikey！</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="zh-network/zh-blog-comments"
+        issue-term="pathname"
+        
+        label="zh-blog"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 ZH 小涵的日常～
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

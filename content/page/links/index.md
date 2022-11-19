@@ -12,7 +12,7 @@ links:
   - title: Jioushan
     description: 虽然是个废宅，这是我仅存的一点空间，不要压垮它。
     website: https://blog.jsmsr.com
-    image: https://cdn.jioushan.top/img/4.jpeg
+    image: jioushan.jpeg
 menu:
     main: 
         weight: -50
