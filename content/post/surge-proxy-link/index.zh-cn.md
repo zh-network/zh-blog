@@ -6,7 +6,6 @@ slug: surge-proxy-link
 image: QQ20221120-015953@2x.png
 categories:
     - 技术日常
-    - 生活点滴
 ---
 
 ~~如何优雅的使用自己的节点~~
