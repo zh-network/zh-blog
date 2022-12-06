@@ -13,6 +13,10 @@ links:
     description: 虽然是个废宅，这是我仅存的一点空间，不要压垮它。
     website: https://blog.jsmsr.com
     image: jioushan.jpeg
+  - title: Airs Home
+    description: 一个奇奇怪怪，啥都有的小网站（
+    website: https://blog.zhiccc.net
+    image: https://blog.zhiccc.net/wp-content/uploads/2020/07/Logo-1.png
 menu:
     main: 
         weight: -50
