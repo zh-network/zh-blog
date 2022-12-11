@@ -4,7 +4,7 @@ links:
   - title: ZH NET
     description: ZH 自营网络 ZH NETWORK LIMITED(AS202888).
     website: https://zhnet.co.uk
-    image: https://dp2-9gqbw0qaf681fbec-1305978723.tcloudbaseapp.com/zhnet/logoonly-removebg-preview.png
+    image: https://ixp.ee/zhnetremovebg-cut.png
   - title: ZH的爱发电
     description: ZH的爱发电页面！欢迎大家给涵发电！！！
     website: https://afdian.net/a/zh_fontana
@@ -25,6 +25,10 @@ links:
     description: 一个写了很多没用的东西的BLOG
     website: https://blog.bairuo.net
     image: https://file.bairuo.net/logo.jpg
+  - title: JIPA233の小窝
+    description: Deed divides beings into lower and higher ones.
+    website: https://jipa.uk
+    image: https://jipa.uk/static/avatar.jpg
 menu:
     main: 
         weight: -50
