@@ -6,7 +6,38 @@
         <description>Recent content in Posts on ZH 小涵的日常～</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Fri, 18 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.eden-official.co.uk/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 11 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.eden-official.co.uk/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ingress 近期记录 一</title>
+        <link>https://blog.eden-official.co.uk/p/ingress-logs-1/</link>
+        <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://blog.eden-official.co.uk/p/ingress-logs-1/</guid>
+        <description>&lt;img src="https://blog.eden-official.co.uk/p/ingress-logs-1/what-is-ingress-prime-bg-d.jpg" alt="Featured image of post Ingress 近期记录 一" /&gt;&lt;h2 id=&#34;20221202&#34;&gt;2022.12.02&lt;/h2&gt;
+&lt;p&gt;去航站楼做核酸 顺便
+第一次入侵，部署和升级！&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://t.me/zh_daily/2405&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://t.me/zh_daily/2405&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20221203&#34;&gt;2022.12.03&lt;/h2&gt;
+&lt;p&gt;出门占了一堆po，二级的材料都用完了.jpg&lt;/p&gt;
+&lt;p&gt;Uat4看着认真 Ingress的ZH：
+第一次看见一个人指着一个中式古风建筑大喊：你看这是一个portal！&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://t.me/zh_daily/2414&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://t.me/zh_daily/2414&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20221207&#34;&gt;2022.12.07&lt;/h2&gt;
+&lt;p&gt;做核酸 顺便 升级portal 第一次使用无人机w&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://t.me/zh_daily/2445&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://t.me/zh_daily/2445&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20221209&#34;&gt;2022.12.09&lt;/h2&gt;
+&lt;p&gt;第一次连线成一片区域嘿嘿，真的是走路游戏.jpg&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://t.me/zh_daily/2457&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://t.me/zh_daily/2457&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20221211&#34;&gt;2022.12.11&lt;/h2&gt;
+&lt;p&gt;送站顺便做个任务&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://t.me/zh_daily/2467&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://t.me/zh_daily/2467&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>代理链配置 - 让 Socks5/ssr 等协议在同等协议之上连接</title>
         <link>https://blog.eden-official.co.uk/p/surge-proxy-link/</link>
         <pubDate>Fri, 18 Nov 2022 00:00:00 +0000</pubDate>
